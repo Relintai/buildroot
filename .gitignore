@@ -5,6 +5,9 @@
 /.config.old
 /..config.tmp
 /.config
+
+/pandemonium-toolchains
+
 *.depend
 *.o
 /*.patch
