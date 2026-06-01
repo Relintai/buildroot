@@ -59,7 +59,8 @@ fi
 
 function build_linux_sdk() {
   ${container} build -f Dockerfile.linux-builder -t godot-buildroot-builder-linux .
-  ${container} run -it --rm -v $(pwd):/tmp/buildroot:z -w /tmp/buildroot -e FORCE_UNSAFE_CONFIGURE=1 --userns=keep-id godot-buildroot-builder-linux bash -c "make clean; make syncconfig; make sdk"
+  ${container} run -it --rm -v $(pwd):/tmp/buildroot:z -w /tmp/buildroot -e FORCE_UNSAFE_CONFIGURE=1 godot-buildroot-builder-linux bash -c "make clean; make syncconfig; make sdk"
+  # --userns=keep-id
 
   mkdir -p godot-toolchains
 
