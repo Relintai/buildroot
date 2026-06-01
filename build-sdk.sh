@@ -23,23 +23,23 @@ esac
 
 case $2 in
   i686)
-    cp config-godot-i686 .config
-    toolchain_prefix=i686-godot-linux-gnu
+    cp config-pandemonium-i686 .config
+    toolchain_prefix=i686-pandemonium-linux-gnu
     bits=32
   ;;
   x86_64)
-    cp config-godot-x86_64 .config
-    toolchain_prefix=x86_64-godot-linux-gnu
+    cp config-pandemonium-x86_64 .config
+    toolchain_prefix=x86_64-pandemonium-linux-gnu
     bits=64
   ;;
   armv7)
-    cp config-godot-armv7 .config
-    toolchain_prefix=arm-godot-linux-gnueabihf
+    cp config-pandemonium-armv7 .config
+    toolchain_prefix=arm-pandemonium-linux-gnueabihf
     bits=32
   ;;
   aarch64)
-    cp config-godot-aarch64 .config
-    toolchain_prefix=aarch64-godot-linux-gnu
+    cp config-pandemonium-aarch64 .config
+    toolchain_prefix=aarch64-pandemonium-linux-gnu
     bits=64
   ;;
   *)
@@ -58,20 +58,20 @@ else
 fi
 
 function build_linux_sdk() {
-  ${container} build -f Dockerfile.linux-builder -t godot-buildroot-builder-linux .
-  ${container} run -it --rm -v $(pwd):/tmp/buildroot:z -w /tmp/buildroot -e FORCE_UNSAFE_CONFIGURE=1 godot-buildroot-builder-linux bash -c "make clean; make syncconfig; make sdk"
+  ${container} build -f Dockerfile.linux-builder -t pandemonium-buildroot-builder-linux .
+  ${container} run -it --rm -v $(pwd):/tmp/buildroot:z -w /tmp/buildroot -e FORCE_UNSAFE_CONFIGURE=1 pandemonium-buildroot-builder-linux bash -c "make clean; make syncconfig; make sdk"
   # --userns=keep-id
 
-  mkdir -p godot-toolchains
+  mkdir -p pandemonium-toolchains
 
-  rm -fr godot-toolchains/${toolchain_prefix}_sdk-buildroot
-  tar xf output/images/${toolchain_prefix}_sdk-buildroot.tar.gz -C godot-toolchains
+  rm -fr pandemonium-toolchains/${toolchain_prefix}_sdk-buildroot
+  tar xf output/images/${toolchain_prefix}_sdk-buildroot.tar.gz -C pandemonium-toolchains
 
-  pushd godot-toolchains/${toolchain_prefix}_sdk-buildroot
+  pushd pandemonium-toolchains/${toolchain_prefix}_sdk-buildroot
   ../../clean-linux-toolchain.sh ${toolchain_prefix} ${bits}
   popd
 
-  pushd godot-toolchains
+  pushd pandemonium-toolchains
   tar -cjf ${toolchain_prefix}_sdk-buildroot.tar.bz2 ${toolchain_prefix}_sdk-buildroot
   rm -rf ${toolchain_prefix}_sdk-buildroot
   popd
@@ -81,4 +81,4 @@ build_linux_sdk
 
 echo
 echo "***************************************"
-echo "Build succesful your toolchain is in the godot-toolchains directory"
+echo "Build succesful your toolchain is in the pandemonium-toolchains directory"
