@@ -81,7 +81,9 @@ function build_linux_sdk() {
   ../../clean-linux-toolchain.sh ${toolchain_prefix} ${bits}
   popd
 
-  mv pandemonium-toolchains/${toolchain_prefix}_sdk-buildroot pandemonium-toolchains/${target_toolchain_prefix}_sdk-buildroot
+  if [[ "$toolchain_prefix" != "$target_toolchain_prefix" ]]; then
+    mv pandemonium-toolchains/${toolchain_prefix}_sdk-buildroot pandemonium-toolchains/${target_toolchain_prefix}_sdk-buildroot
+  fi
 
   pushd pandemonium-toolchains
   tar -cjf ${target_toolchain_prefix}_sdk-buildroot.tar.bz2 ${target_toolchain_prefix}_sdk-buildroot
