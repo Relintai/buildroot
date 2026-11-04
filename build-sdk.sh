@@ -4,7 +4,7 @@ set -e
 function usage() {
   echo "usage: $0 host target"
   echo "  where host is one of linux-x86_64"
-  echo "  where target is one of i686, x86_64, armv7, aarch64"
+  echo "  where target is one of i686, x86_64, armv7, aarch64, armv6"
   exit 1
 }
 
@@ -41,6 +41,11 @@ case $2 in
     cp config-pandemonium-aarch64 .config
     toolchain_prefix=aarch64-pandemonium-linux-gnu
     bits=64
+  ;;
+  armv6)
+    cp config-pandemonium-armv6 .config
+    toolchain_prefix=armv6-pandemonium-linux-gnueabihf
+    bits=32
   ;;
   *)
     echo "unknown SDK target \"$2\""
