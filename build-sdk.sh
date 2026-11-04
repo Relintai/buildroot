@@ -25,26 +25,31 @@ case $2 in
   i686)
     cp config-pandemonium-i686 .config
     toolchain_prefix=i686-pandemonium-linux-gnu
+    target_toolchain_prefix=i686-pandemonium-linux-gnu
     bits=32
   ;;
   x86_64)
     cp config-pandemonium-x86_64 .config
     toolchain_prefix=x86_64-pandemonium-linux-gnu
+    target_toolchain_prefix=x86_64-pandemonium-linux-gnu
     bits=64
   ;;
   armv7)
     cp config-pandemonium-armv7 .config
     toolchain_prefix=arm-pandemonium-linux-gnueabihf
+    target_toolchain_prefix=armv7-pandemonium-linux-gnueabihf
     bits=32
   ;;
   aarch64)
     cp config-pandemonium-aarch64 .config
     toolchain_prefix=aarch64-pandemonium-linux-gnu
+    target_toolchain_prefix=aarch64-pandemonium-linux-gnu
     bits=64
   ;;
   armv6)
     cp config-pandemonium-armv6 .config
-    toolchain_prefix=armv6-pandemonium-linux-gnueabihf
+    toolchain_prefix=arm-pandemonium-linux-gnueabihf
+    target_toolchain_prefix=armv6-pandemonium-linux-gnueabihf
     bits=32
   ;;
   *)
@@ -76,9 +81,11 @@ function build_linux_sdk() {
   ../../clean-linux-toolchain.sh ${toolchain_prefix} ${bits}
   popd
 
+  mv pandemonium-toolchains/${toolchain_prefix}_sdk-buildroot pandemonium-toolchains/${target_toolchain_prefix}_sdk-buildroot
+
   pushd pandemonium-toolchains
-  tar -cjf ${toolchain_prefix}_sdk-buildroot.tar.bz2 ${toolchain_prefix}_sdk-buildroot
-  rm -rf ${toolchain_prefix}_sdk-buildroot
+  tar -cjf ${target_toolchain_prefix}_sdk-buildroot.tar.bz2 ${target_toolchain_prefix}_sdk-buildroot
+  rm -rf ${target_toolchain_prefix}_sdk-buildroot
   popd
 }
 
