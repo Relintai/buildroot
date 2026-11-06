@@ -86,3 +86,19 @@ At this point your changes exist in .config. **Make a backup**. If you're buildi
 First of all: Thanks for wanting to help! Second of all: Since we support multiple architectures make sure that you make *the same* changes to all architectures and PR them together. If you *specifically* want to make a change to one architecture please note that clearly in the PR message.
 
 Thanks!
+
+
+## Build config notes
+
+### BR2_PACKAGE_MESA3D_DRI3=y
+
+Needed to be able to build MESA + EGL for now
+It's actually a bug in the mesa version this buildroot is using,
+it fas fixed later. Check on upgrade whether this is still needed.
+
+### BR2_PACKAGE_OPENGL=y
+
+might not needed
+
+
+
