@@ -14,6 +14,13 @@ The toolchain current contains the following:
  * libGL
  * fontconfig
  * speechd
+ * SDL2 (for the frt_sdl backend)
+ * libEGL (for the frt and frt_sdl backends)
+
+Note that arm32 in the editor refers to the armv7 toolchain.
+
+ALso note that armv6 is set up to work on the raspberry pi zero 1 (w). If you need to target other sbcs that are incompatible,
+you should customize the toolchain for yourself.
 
 # Using the SDKs
 
