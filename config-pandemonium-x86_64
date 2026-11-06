@@ -919,7 +919,7 @@ BR2_PACKAGE_MESA3D_OSMESA_GALLIUM=y
 # gbm support needs a gallium driver w/ EGL support.
 #
 BR2_PACKAGE_MESA3D_OPENGL_GLX=y
-BR2_PACKAGE_MESA3D_OPENGL_EGL=y
+# BR2_PACKAGE_MESA3D_OPENGL_EGL is not set
 BR2_PACKAGE_MESA3D_OPENGL_ES=y
 # BR2_PACKAGE_OCRAD is not set
 # BR2_PACKAGE_OGRE is not set
@@ -934,13 +934,6 @@ BR2_PACKAGE_SDL2_X11=y
 BR2_PACKAGE_SDL2_KMSDRM=y
 # BR2_PACKAGE_TK is not set
 # BR2_PACKAGE_VULKAN_HEADERS is not set
-
-# Needed to be able to build MESA + EGL for now
-# It's actually a bug in the mesa version this buildroot is using,
-# it fas fixed later. Check on upgrade whether this is still needed.
-BR2_PACKAGE_MESA3D_DRI3=y
-# might not needed
-BR2_PACKAGE_OPENGL=y
 
 #
 # Other GUIs
@@ -4042,3 +4035,4 @@ BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR=""
 # BR2_BINUTILS_VERSION_2_22 is not set
 # BR2_PACKAGE_GPU_VIV_BIN_MX6Q is not set
 # BR2_TARGET_UBOOT_NETWORK is not set
+
