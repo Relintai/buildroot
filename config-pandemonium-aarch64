@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2023.08.2-48-geed2393342-dirty Configuration
+# Buildroot 2023.08.4 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -8,7 +8,6 @@ BR2_HOST_GCC_AT_LEAST_5=y
 BR2_HOST_GCC_AT_LEAST_6=y
 BR2_HOST_GCC_AT_LEAST_7=y
 BR2_HOST_GCC_AT_LEAST_8=y
-BR2_HOST_GCC_AT_LEAST_9=y
 BR2_NEEDS_HOST_UTF8_LOCALE=y
 
 #
@@ -144,7 +143,7 @@ BR2_KERNEL_HEADERS_5_15=y
 # BR2_KERNEL_HEADERS_VERSION is not set
 # BR2_KERNEL_HEADERS_CUSTOM_TARBALL is not set
 # BR2_KERNEL_HEADERS_CUSTOM_GIT is not set
-BR2_DEFAULT_KERNEL_HEADERS="5.15.137"
+BR2_DEFAULT_KERNEL_HEADERS="5.15.140"
 BR2_PACKAGE_LINUX_HEADERS=y
 BR2_PACKAGE_MUSL_ARCH_SUPPORTS=y
 BR2_PACKAGE_MUSL_SUPPORTS=y
@@ -356,6 +355,10 @@ BR2_GLOBAL_PATCH_DIR=""
 # Advanced
 #
 # BR2_FORCE_HOST_BUILD is not set
+
+#
+# Forcing all downloads to have a valid hash needs a global patch and hash directory
+#
 # BR2_REPRODUCIBLE is not set
 # BR2_PER_PACKAGE_DIRECTORIES is not set
 
@@ -483,6 +486,7 @@ BR2_PACKAGE_KODI_ARCH_SUPPORTS=y
 # kodi needs python3 w/ .py modules, a uClibc or glibc toolchain w/ C++, threads, wchar, dynamic library, gcc >= 9.x
 #
 BR2_PACKAGE_KODI_PLATFORM_SUPPORTS=y
+BR2_PACKAGE_KODI_PLATFORM_SUPPORTS_GBM=y
 BR2_PACKAGE_KODI_PLATFORM_SUPPORTS_X11=y
 # BR2_PACKAGE_LAME is not set
 # BR2_PACKAGE_MADPLAY is not set
@@ -804,10 +808,7 @@ BR2_PACKAGE_LIBTOOL=y
 #
 # Graphic applications
 #
-
-#
-# cage needs udev, EGL w/ Wayland backend and OpenGL ES support
-#
+# BR2_PACKAGE_CAGE is not set
 
 #
 # cog needs wpewebkit and a toolchain w/ threads
@@ -815,18 +816,15 @@ BR2_PACKAGE_LIBTOOL=y
 # BR2_PACKAGE_FSWEBCAM is not set
 # BR2_PACKAGE_GHOSTSCRIPT is not set
 BR2_PACKAGE_GLMARK2_FLAVOR_ANY=y
+BR2_PACKAGE_GLMARK2_FLAVOR_DRM_GLESV2=y
+BR2_PACKAGE_GLMARK2_FLAVOR_DRM_GL=y
+BR2_PACKAGE_GLMARK2_FLAVOR_X11_GLESV2=y
 BR2_PACKAGE_GLMARK2_FLAVOR_X11_GL=y
 # BR2_PACKAGE_GLMARK2 is not set
-
-#
-# glslsandbox-player needs openGL ES and EGL driver
-#
+# BR2_PACKAGE_GLSLSANDBOX_PLAYER is not set
 # BR2_PACKAGE_GNUPLOT is not set
 # BR2_PACKAGE_JHEAD is not set
-
-#
-# kmscube needs EGL, GBM and OpenGL ES, and a toolchain w/ thread support
-#
+# BR2_PACKAGE_KMSCUBE is not set
 # BR2_PACKAGE_LIBVA_UTILS is not set
 # BR2_PACKAGE_MESA3D_DEMOS is not set
 BR2_PACKAGE_MIDORI_ARCH_SUPPORTS=y
@@ -842,10 +840,7 @@ BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
 #
 # stellarium needs Qt5 and an OpenGL provider
 #
-
-#
-# sway needs systemd, udev, EGL w/ Wayland backend and OpenGL ES support
-#
+# BR2_PACKAGE_SWAY is not set
 # BR2_PACKAGE_SWAYBG is not set
 # BR2_PACKAGE_TESSERACT_OCR is not set
 # BR2_PACKAGE_TINIFIER is not set
@@ -866,6 +861,7 @@ BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
 # BR2_PACKAGE_IMAGEMAGICK is not set
 # BR2_PACKAGE_LIBGLVND is not set
 BR2_PACKAGE_PROVIDES_LIBGL="mesa3d"
+BR2_PACKAGE_PROVIDES_LIBEGL="mesa3d"
 BR2_PACKAGE_PROVIDES_LIBGLES="mesa3d"
 
 #
@@ -873,6 +869,7 @@ BR2_PACKAGE_PROVIDES_LIBGLES="mesa3d"
 #
 BR2_PACKAGE_MESA3D=y
 # BR2_PACKAGE_MESA3D_LLVM is not set
+BR2_PACKAGE_MESA3D_DRI3=y
 BR2_PACKAGE_MESA3D_GALLIUM_DRIVER=y
 BR2_PACKAGE_MESA3D_DRIVER=y
 BR2_PACKAGE_MESA3D_NEEDS_X11=y
@@ -907,33 +904,31 @@ BR2_PACKAGE_MESA3D_OSMESA_GALLIUM=y
 #
 # OpenGL API Support
 #
-
-#
-# gbm support needs a gallium driver w/ EGL support.
-#
+BR2_PACKAGE_MESA3D_GBM=y
 BR2_PACKAGE_MESA3D_OPENGL_GLX=y
 BR2_PACKAGE_MESA3D_OPENGL_EGL=y
 BR2_PACKAGE_MESA3D_OPENGL_ES=y
+BR2_PACKAGE_PROVIDES_LIBGBM="mesa3d"
 # BR2_PACKAGE_OCRAD is not set
 # BR2_PACKAGE_OGRE is not set
 # BR2_PACKAGE_PSPLASH is not set
 # BR2_PACKAGE_SDL is not set
 BR2_PACKAGE_SDL2=y
+
+#
+# DirectFB video driver needs directfb
+#
 BR2_PACKAGE_SDL2_X11=y
+BR2_PACKAGE_SDL2_KMSDRM=y
 BR2_PACKAGE_SDL2_OPENGL=y
 BR2_PACKAGE_SDL2_OPENGLES=y
 BR2_PACKAGE_SDL2_GFX=y
-BR2_PACKAGE_SDL2_X11=y
-BR2_PACKAGE_SDL2_KMSDRM=y
+# BR2_PACKAGE_SDL2_IMAGE is not set
+# BR2_PACKAGE_SDL2_MIXER is not set
+# BR2_PACKAGE_SDL2_NET is not set
+# BR2_PACKAGE_SDL2_TTF is not set
 # BR2_PACKAGE_TK is not set
 # BR2_PACKAGE_VULKAN_HEADERS is not set
-
-# Needed to be able to build MESA + EGL for now
-# It's actually a bug in the mesa version this buildroot is using,
-# it fas fixed later. Check on upgrade whether this is still needed.
-BR2_PACKAGE_MESA3D_DRI3=y
-# might not needed
-BR2_PACKAGE_OPENGL=y
 
 #
 # Other GUIs
@@ -1724,11 +1719,12 @@ BR2_PACKAGE_JPEG_SIMD_SUPPORT=y
 # BR2_PACKAGE_LIBDRI2 is not set
 BR2_PACKAGE_LIBDRM=y
 BR2_PACKAGE_LIBDRM_HAS_ATOMIC=y
+BR2_PACKAGE_LIBDRM_ENABLE_ATOMIC=y
 # BR2_PACKAGE_LIBDRM_RADEON is not set
 # BR2_PACKAGE_LIBDRM_AMDGPU is not set
 # BR2_PACKAGE_LIBDRM_NOUVEAU is not set
 # BR2_PACKAGE_LIBDRM_ETNAVIV is not set
-# BR2_PACKAGE_LIBDRM_FREEDRENO is not set
+BR2_PACKAGE_LIBDRM_FREEDRENO=y
 # BR2_PACKAGE_LIBDRM_VC4 is not set
 # BR2_PACKAGE_LIBDRM_INSTALL_TESTS is not set
 # BR2_PACKAGE_LIBEPOXY is not set
@@ -1758,14 +1754,16 @@ BR2_PACKAGE_LIBDRM_HAS_ATOMIC=y
 # BR2_PACKAGE_LIBVA is not set
 # BR2_PACKAGE_LIBVDPAU is not set
 # BR2_PACKAGE_LIBVIPS is not set
-
-#
-# libwpe needs a toolchain w/ C++, dynamic library and an OpenEGL-capable backend
-#
+# BR2_PACKAGE_LIBWPE is not set
 # BR2_PACKAGE_MENU_CACHE is not set
 # BR2_PACKAGE_OPENCV3 is not set
 # BR2_PACKAGE_OPENCV4 is not set
 BR2_PACKAGE_HAS_LIBGL=y
+BR2_PACKAGE_HAS_LIBEGL=y
+BR2_PACKAGE_HAS_LIBEGL_WAYLAND=y
+BR2_PACKAGE_HAS_LIBGBM=y
+BR2_PACKAGE_LIBGBM_HAS_FEATURE_FORMAT_MODIFIER_PLANE_COUNT=y
+BR2_PACKAGE_LIBGBM_HAS_FEATURE_DMA_BUF=y
 BR2_PACKAGE_HAS_LIBGLES=y
 # BR2_PACKAGE_OPENJPEG is not set
 # BR2_PACKAGE_PANGO is not set
@@ -1777,6 +1775,8 @@ BR2_PACKAGE_HAS_LIBGLES=y
 # BR2_PACKAGE_TIFF is not set
 # BR2_PACKAGE_UNCLUTTER_XFIXES is not set
 BR2_PACKAGE_WAFFLE_SUPPORTS_GLX=y
+BR2_PACKAGE_WAFFLE_SUPPORTS_X11_EGL=y
+BR2_PACKAGE_WAFFLE_SUPPORTS_GBM=y
 # BR2_PACKAGE_WAFFLE is not set
 # BR2_PACKAGE_WAYLAND is not set
 BR2_PACKAGE_WEBKITGTK_ARCH_SUPPORTS=y
@@ -1785,20 +1785,11 @@ BR2_PACKAGE_WEBKITGTK_ARCH_SUPPORTS=y
 # webkitgtk needs libgtk3 and a toolchain w/ C++, wchar, threads, dynamic library, gcc >= 9, host gcc >= 4.9
 #
 # BR2_PACKAGE_WEBP is not set
-
-#
-# wlroots needs udev, EGL w/ Wayland backend and OpenGL ES support
-#
+# BR2_PACKAGE_WLROOTS is not set
 # BR2_PACKAGE_WOFF2 is not set
-
-#
-# wpebackend-fdo needs a toolchain w/ C++, wchar, threads, dynamic library and an OpenEGL-capable Wayland backend
-#
+# BR2_PACKAGE_WPEBACKEND_FDO is not set
 BR2_PACKAGE_WPEWEBKIT_ARCH_SUPPORTS=y
-
-#
-# wpewebkit needs an OpenGL ES w/ EGL-capable Wayland backend
-#
+# BR2_PACKAGE_WPEWEBKIT is not set
 # BR2_PACKAGE_ZBAR is not set
 # BR2_PACKAGE_ZXING_CPP is not set
 
@@ -2922,10 +2913,6 @@ BR2_PACKAGE_OPENVMTOOLS_ARCH_SUPPORTS=y
 # pamtester depends on linux-pam
 #
 # BR2_PACKAGE_PETITBOOT is not set
-
-#
-# petitboot needs a uClibc or glibc toolchain w/ wchar, dynamic library, threads, udev /dev management
-#
 # BR2_PACKAGE_POLKIT is not set
 # BR2_PACKAGE_PROCPS_NG is not set
 # BR2_PACKAGE_PROCRANK_LINUX is not set
@@ -3243,12 +3230,12 @@ BR2_PACKAGE_HOST_QEMU_USER_ARCH_SUPPORTS=y
 # BR2_PACKAGE_HOST_RAUC is not set
 # BR2_PACKAGE_HOST_RISCV_ISA_SIM is not set
 # BR2_PACKAGE_HOST_RUNC is not set
-#BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS=y
-#BR2_PACKAGE_HOST_RUSTC_TARGET_TIER1_PLATFORMS=y
-#BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS=y
-#BR2_PACKAGE_HOST_RUSTC_ARCH="aarch64"
+BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS=y
+BR2_PACKAGE_HOST_RUSTC_TARGET_TIER1_PLATFORMS=y
+BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS=y
+BR2_PACKAGE_HOST_RUSTC_ARCH="aarch64"
 # BR2_PACKAGE_HOST_RUSTC is not set
-#BR2_PACKAGE_PROVIDES_HOST_RUSTC="host-rust-bin"
+BR2_PACKAGE_PROVIDES_HOST_RUSTC="host-rust-bin"
 # BR2_PACKAGE_HOST_SAM_BA is not set
 # BR2_PACKAGE_HOST_SDBUSPLUS is not set
 # BR2_PACKAGE_HOST_SENTRY_CLI is not set
@@ -4042,3 +4029,4 @@ BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR=""
 # BR2_BINUTILS_VERSION_2_22 is not set
 # BR2_PACKAGE_GPU_VIV_BIN_MX6Q is not set
 # BR2_TARGET_UBOOT_NETWORK is not set
+
