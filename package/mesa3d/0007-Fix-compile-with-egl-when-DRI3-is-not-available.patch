@@ -1,0 +1,64 @@
+From 339eb74f46b9ad5cba1a9658eb564f1f08a15858 Mon Sep 17 00:00:00 2001
+From: Relintai <relintai@relintai.net>
+Date: Sat, 7 Nov 2026 10:05:58 +0100
+Subject: [PATCH 1/1] Fix compile with egl when DRI3 is not available.
+
+---
+ src/egl/drivers/dri2/platform_x11.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/egl/drivers/dri2/platform_x11.c b/src/egl/drivers/dri2/platform_x11.c
+index 917c82b..1ed4e40 100644
+--- a/src/egl/drivers/dri2/platform_x11.c
++++ b/src/egl/drivers/dri2/platform_x11.c
+@@ -1226,6 +1226,7 @@ dri2_x11_get_msc_rate(_EGLDisplay *display, _EGLSurface *surface,
+ {
+    struct dri2_egl_display *dri2_dpy = dri2_egl_display(display);
+ 
++#ifdef HAVE_DRI3
+    loader_update_screen_resources(&dri2_dpy->screen_resources);
+ 
+    if (dri2_dpy->screen_resources.num_crtcs == 0) {
+@@ -1242,7 +1243,10 @@ dri2_x11_get_msc_rate(_EGLDisplay *display, _EGLSurface *surface,
+    /* If there's only one active CRTC, we're done */
+    if (dri2_dpy->screen_resources.num_crtcs == 1)
+       return EGL_TRUE;
+-
++#else
++   *numerator = 0;
++   *denominator = 1;
++#endif
+    /* In a multi-monitor setup, look at each CRTC and perform a box
+     * intersection between the CRTC and surface.  Use the CRTC whose
+     * box intersection has the largest area.
+@@ -1264,6 +1268,7 @@ dri2_x11_get_msc_rate(_EGLDisplay *display, _EGLSurface *surface,
+       return EGL_FALSE;
+    }
+ 
++#ifdef HAVE_DRI3
+    int area = 0;
+ 
+    for (unsigned c = 0; c < dri2_dpy->screen_resources.num_crtcs; c++) {
+@@ -1280,7 +1285,7 @@ dri2_x11_get_msc_rate(_EGLDisplay *display, _EGLSurface *surface,
+          area = c_area;
+       }
+    }
+-
++#endif
+    /* If the window is entirely off-screen, then area will still be 0.
+     * We defaulted to the first CRTC in the list's refresh rate, earlier.
+     */
+@@ -1814,8 +1819,10 @@ dri2_initialize_x11(_EGLDisplay *disp)
+ void
+ dri2_teardown_x11(struct dri2_egl_display *dri2_dpy)
+ {
++#ifdef HAVE_DRI3
+    if (dri2_dpy->dri2_major >= 3)
+       loader_destroy_screen_resources(&dri2_dpy->screen_resources);
++#endif
+ 
+    if (dri2_dpy->own_device)
+       xcb_disconnect(dri2_dpy->conn);
+-- 
+2.56.0
+
